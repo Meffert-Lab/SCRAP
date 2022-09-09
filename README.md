@@ -2,14 +2,16 @@
 
 | File Name &nbsp;                    | Description |
 | -------------- | ---------- |
-| environment.yml   | YML file for creating Conda environment with packages required for running PACeR.        |
-| hisat2_index_downloads.txt | Text file containing links to HISAT2-indexed genomes of several common model organisms. |
-| miRBase.fasta      | FASTA file containing miRNAs downloaded from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022).        |
-| reference_installation.sh      | Shell script for downloading and configuring reference files.        |
-| PACeR.sh      | Shell script for running PACeR.        |
-| PACeR_CLEAR-CLIP.sh      | Modified shell script for running PACeR with data from [Moore et al. 2015](https://www.nature.com/articles/ncomms9864).        |
-| PeakCalling_Total.sh      | Shell script for calling peaks for all sncRNAs from output of `PACeR.sh`.        |
-| PeakCalling_Subset.sh      | Shell script for calling peaks for specific sncRNAs or sncRNA familes from output of `PACeR.sh`.        |
+| SCRAP_environment.yml   | File for creating a Conda environment with the requisite tools for running SCRAP        |
+| Reference_Installation.sh | Script for configuring reference files required for SCRAP |
+| SCRAP.sh   | Script for processing compressed FASTQ files to generate a BAM file containing uniquely aligned reads annotated with the corresponding sncRNA within the read        |
+| Peak_Calling.sh   | Script for calling peaks using output files from SCRAP.sh        |
+| Peak_Annotation.sh   | Script for annotating bed file produced by Peak_Calling.sh with gene names and features        |
+| miRBase.fasta      | FASTA file containing miRNAs downloaded from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022)        |
+| miRBase.hairpin.fasta      | FASTA file containing miRNA hairpin sequences obtained from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022) |
+| GtRNAdb.fasta      | FASTA file containing tRNA sequences obtained from [GtRNAdb](http://gtrnadb.ucsc.edu) (accessed July 15, 2022)        |
+| miRNA family file      | Add description        |
+
 
 ## Installation
 
@@ -20,21 +22,21 @@ Once in the directory where you would like the PACeR files (XX MB) to be install
 
 Create the Conda environment by running:
 
-    conda config --append channels conda-forge
-    conda env create -f PACeR_New/environment.yml -n PACeR
+    conda install -n base conda-forge::mamba
+    mamba env create -f SCRAP/SCRAP_environment.yml -n SCRAP
 
 Execute the `reference_installation.sh` script with the following command line parameters (requires [Miniconda](https://docs.conda.io/en/latest/miniconda.html)):
 
 | Command Line Parameter | Description |
 | ---------- | ---------- |
-| `-r` | Path to reference directory (e.g. `PACeR_New`) |
+| `-r` | Path to reference directory (e.g. `SCRAP`) |
 | `-m` | Three-letter miRBase species abbreviation |
 | `-g` | Reference genome abbreviation |
 
 Example code for configuring human references:
 
-    bash PACeR_New/reference_installation.sh \
-        -r /media/sf_Ubuntu_Sharing_2022/PACeR_New \
+    bash SCRAP/reference_installation.sh \
+        -r SCRAP/ \
         -m hsa \
         -g hg38
 
@@ -42,8 +44,8 @@ Example code for configuring human references:
 
 Ensure data files are in the following configuration
 
-        │───PACeR_New
-        │         environment.yml
+        │───SCRAP
+        │         SCRAP_environment.yml
         │         hisat2_index_downloads.txt
         │         PACeR.sh
         │         PeakCalling.sh
