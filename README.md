@@ -118,7 +118,7 @@ Execute the `Peak_Calling.sh` script with the following command line parameters:
 
 The adapter file can be the same as the adapter file used when running SCRAP or simply a `.txt` file with one sample name per row.
 
-Example code for calling peaks with CLASH data previously analyzed with SCRAP:
+Example code for calling peaks with CLASH data previously analyzed with `SCRAP.sh`:
 
     bash Peak_Calling.sh \
         -d CLASH_Human/ \
