@@ -18,14 +18,14 @@
 Once in the directory where you would like the PACeR files (XX MB) to be installed, run:
 
     sudo apt install git
-    git clone https://github.com/Meffert-Lab/PACeR_New.git
+    git clone https://github.com/Meffert-Lab/SCRAP.git
 
-Create the Conda environment by running:
+Create the Conda environment by running (requires [Miniconda](https://docs.conda.io/en/latest/miniconda.html)):
 
     conda install -n base conda-forge::mamba
     mamba env create -f SCRAP/SCRAP_environment.yml -n SCRAP
 
-Execute the `reference_installation.sh` script with the following command line parameters (requires [Miniconda](https://docs.conda.io/en/latest/miniconda.html)):
+Execute the `reference_installation.sh` script with the following command line parameters:
 
 | Command Line Parameter | Description |
 | ---------- | ---------- |
@@ -35,7 +35,7 @@ Execute the `reference_installation.sh` script with the following command line p
 
 Example code for configuring human references:
 
-    bash SCRAP/reference_installation.sh \
+    bash SCRAP/Reference_Installation.sh \
         -r SCRAP/ \
         -m hsa \
         -g hg38
@@ -46,11 +46,13 @@ Ensure data files are in the following configuration
 
         │───SCRAP
         │         SCRAP_environment.yml
-        │         hisat2_index_downloads.txt
-        │         PACeR.sh
-        │         PeakCalling.sh
-        │         reference_installation.sh
-        │         sncRNA.fasta
+        │         Reference_Installation.sh
+        │         SCRAP.sh
+        │         Peak_Calling.sh
+        │         Peak_Annotation.sh
+        │         miRBase.fasta
+        │         miRBase.hairpin.fasta
+        │         GtRNAdb.fasta
         │  
         └───files 
              │       
@@ -67,23 +69,25 @@ Ensure data files are in the following configuration
                      sample3_R1.fastq.gz
                      sample3_R2.fastq.gz
 
-Execute the `PACeR.sh` script with the following command line parameters:
+Execute the `SCRAP.sh` script with the following command line parameters:
 
 | Command Line Parameter | Description |
 | ---------- | ---------- |
 | `-d` | Path to directory containing sample directories |
 | `-a` | Path to adapter file |
 | `-p` | Denote wether samples are paired-end (`yes` or `no`) |
-| `-r` | Path to reference directory (e.g. `PACeR_New`) |
+| `-f` | Indicate whether or not to filter out pre-miRNAs and tRNAs (`yes` or `no`) |
+| `-r` | Path to reference directory (e.g. `SCRAP`) |
 | `-m` | Three-letter miRBase species abbreviation |
 | `-g` | Reference genome abbreviation |
 
 Example code for analyzing CLASH data:
 
     bash PACeR.sh \
-        -d /media/sf_Ubuntu_Sharing_2022/CLASH_Human \
-        -a /media/sf_Ubuntu_Sharing_2022/CLASH_Human/CLASH_Human_Adapters.txt \
+        -d CLASH_Human/ \
+        -a CLASH_Human/CLASH_Human_Adapters.txt \
         -p no \
-        -r /media/sf_Ubuntu_Sharing_2022/PACeR_New \
+        -f yes \
+        -r SCRAP/ \
         -m hsa \
         -g hg38
