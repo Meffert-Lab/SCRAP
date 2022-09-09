@@ -134,7 +134,7 @@ Peak calling will generate a `peaks.bed` (or `peaks.family.bed`) and `peakcallin
 
 ## Peak Annotation
 
-The `peaks.bed` (or `peaks.family.bed`) file produced by `Peak_Calling.sh` can be annotated with gene names and features. Currently, this function is only available for annotating peaks called for data from human, mouse, or C. elegans.
+The `peaks.bed` (or `peaks.family.bed`) file produced by `Peak_Calling.sh` can be annotated with gene names and features. Currently, this function is only available for annotating peaks called for data from human (*H. sapiens*), mouse (*M. musculus*), or worm (*C. elegans*).
 
 Execute the `Peak_Annotation.sh` script with the following command line parameters:
 
@@ -142,7 +142,7 @@ Execute the `Peak_Annotation.sh` script with the following command line paramete
 | ---- | --------------- |
 | `-p` | Path to peaks.bed or peaks.family.bed file     |
 | `-r` | Path to reference directory (e.g. `SCRAP`)     |
-| `-s` | Indicate species used for annotation (`human` (H. sapiens), `mouse` (M. musculus), or `worm` (C. elegans)  |
+| `-s` | Indicate species used for annotation (`human` (*H. sapiens*), `mouse` (*M. musculus*), or `worm` (*C. elegans*)  |
 
 Example code for annotating peaks with CLASH data idnetified using `Peak_Calling.sh`:
 
