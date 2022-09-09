@@ -4,7 +4,7 @@
 | -------------- | ---------- |
 | SCRAP_environment.yml   | File for creating a Conda environment with the requisite tools for running SCRAP        |
 | Reference_Installation.sh | Script for configuring reference files required for SCRAP |
-| SCRAP.sh   | Script for processing compressed FASTQ files to generate a BAM file containing uniquely aligned reads annotated with the corresponding sncRNA within the read        |
+| SCRAP.sh   | Script for processing raw FASTQ files to identify sncRNA and genomic alignment of reads        |
 | Peak_Calling.sh   | Script for calling peaks using output files from SCRAP.sh        |
 | Peak_Annotation.sh   | Script for annotating bed file produced by Peak_Calling.sh with gene names and features        |
 | miRBase.fasta      | FASTA file containing miRNAs downloaded from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022)        |
