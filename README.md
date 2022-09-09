@@ -28,7 +28,7 @@ Create the Conda environment by running (requires [Miniconda](https://docs.conda
     conda install -n base conda-forge::mamba
     mamba env create -f SCRAP/SCRAP_environment.yml -n SCRAP
 
-Execute the `reference_installation.sh` script with the following command line parameters:
+Execute the `Reference_Installation.sh` script with the following command line parameters:
 
 | Command Line Parameter | Description |
 | ---------- | ---------- |
