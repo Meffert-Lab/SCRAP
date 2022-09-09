@@ -142,7 +142,7 @@ Execute the `Peak_Annotation.sh` script with the following command line paramete
 | ---- | --------------- |
 | `-p` | Path to peaks.bed or peaks.family.bed file     |
 | `-r` | Path to reference directory (e.g. `SCRAP`)     |
-| `-s` | Indicate species from which data were used to call peaks (`human` (H. sapiens), `mouse` (M. musculus), or `worm` (C. elegans)  |
+| `-s` | Indicate species used for annotation (`human` (H. sapiens), `mouse` (M. musculus), or `worm` (C. elegans)  |
 
 Example code for annotating peaks with CLASH data idnetified using `Peak_Calling.sh`:
 
