@@ -1,4 +1,4 @@
-name: PACeR
+name: SCRAP
 channels:
  - bioconda
  - conda-forge
