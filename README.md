@@ -2,6 +2,7 @@
 
 | File Name &nbsp;                    | Description |
 | -------------- | ---------- |
+| PLATFORM-SETUP.md	| Preliminary setup instructions for each compatible platform	|
 | SCRAP_environment.yml   | File for creating a Conda environment with the requisite tools for running SCRAP        |
 | Reference_Installation.sh | Script for configuring reference files required for SCRAP |
 | SCRAP.sh   | Script for processing raw FASTQ files to identify sncRNA and genomic alignment of reads        |
@@ -18,9 +19,12 @@
 
 ## Installation
 
+SCRAP is a cross-platform pipeline that can be used in Windows Subsystem for Linux, MacOS, and Ubuntu.
+In order to install SCRAP, you need one of these platforms as well as Git and Miniconda.
+See PLATFORM-SETUP.md for specific instructions.
+
 Once in the directory where you would like the PACeR files (XX MB) to be installed, run:
 
-    sudo apt install git
     git clone https://github.com/Meffert-Lab/SCRAP.git
 
 Create the Conda environment by running (requires [Miniconda](https://docs.conda.io/en/latest/miniconda.html)):
