@@ -23,11 +23,11 @@ SCRAP is a cross-platform pipeline that can be used in Windows Subsystem for Lin
 In order to install SCRAP, you need one of these platforms as well as Git and Miniconda.
 See PLATFORM-SETUP.md for specific instructions.
 
-Once in the directory where you would like the PACeR files (XX MB) to be installed, run:
+Once in the directory where you would like the SCRAP source to be cloned, run:
 
     git clone https://github.com/Meffert-Lab/SCRAP.git
 
-Create the Conda environment by running (requires [Miniconda](https://docs.conda.io/en/latest/miniconda.html)):
+Create the Conda environment by running (requires [Miniconda](https://docs.conda.io/en/latest/miniconda.html), see PLATFORM-SETUP.md):
 
     conda install -n base conda-forge::mamba
     mamba env create -f SCRAP/SCRAP_environment.yml -n SCRAP
@@ -47,7 +47,7 @@ Example code for configuring human references:
         -m hsa \
         -g hg38
 
-## Running PACeR
+## Running SCRAP
 
 Ensure data files are in the following configuration
 

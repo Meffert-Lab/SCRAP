@@ -18,7 +18,7 @@ After launching WSL, you can then install Git and Miniconda as follows.
 ```
 sudo apt install git
 wget https://repo.anaconda.com/miniconda/Miniconda-3-latest-Linux-x86_64.sh
-sudo bash Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
 ## MacOS
@@ -48,14 +48,14 @@ Miniconda installation differs for M1 Macs and non-M1 Macs.
 
 ```
 curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh --output Miniconda3-latest-MacOSX-x86_64.sh
-sudo zsh Miniconda3-latest-MacOSX-x86_64.sh
+bash Miniconda3-latest-MacOSX-x86_64.sh
 ```
 
 #### M1
 
 ```
 curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh --output Miniconda3-latest-MacOSX-arm64.sh
-sudo zsh Miniconda3-latest-MacOSX-x86_64.sh
+bash Miniconda3-latest-MacOSX-x86_64.sh
 ```
 
 ## Ubuntu
@@ -64,5 +64,5 @@ You can install Git and Miniconda as follows.
 ```
 sudo apt install git
 wget https://repo.anaconda.com/miniconda/Miniconda-3-latest-Linux-x86_64.sh
-sudo bash Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
 ```
