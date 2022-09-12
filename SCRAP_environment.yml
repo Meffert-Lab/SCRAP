@@ -1,0 +1,20 @@
+name: PACeR
+channels:
+ - bioconda
+dependencies:
+  - fastqc
+  - multiqc
+  - flash
+  - cutadapt
+  - blast
+  - hisat2
+  - samtools
+  - bedtools
+  - gatk4
+  - sra-tools
+  - viennarna
+  - bowtie2
+  - picard
+  - flexbar
+  - homer
+  - khmer
