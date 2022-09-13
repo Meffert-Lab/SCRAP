@@ -21,6 +21,8 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
 
+You may need to close and reopen WSL following Miniconda installation.
+
 ## MacOS
 ### Using Homebrew
 Homebrew is a great package manager from MacOS. You can install brew as follows:
@@ -58,6 +60,8 @@ curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh --out
 bash Miniconda3-latest-MacOSX-x86_64.sh
 ```
 
+You may need to close and reopen your Terminal following Miniconda installation.
+
 ## Ubuntu
 You can install Git and Miniconda as follows.
 
@@ -66,3 +70,5 @@ sudo apt install git
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
+
+You may need to close and reopen your shell following Miniconda installation.
