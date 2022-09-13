@@ -1,6 +1,7 @@
-name: PACeR
+name: SCRAP
 channels:
  - bioconda
+ - conda-forge
 dependencies:
   - fastqc
   - multiqc
