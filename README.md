@@ -3,10 +3,10 @@
 ## Contents
 | File or Directory Name &nbsp;                    | Description |
 | -------------- | ---------- |
-| adatpers	| Contains adapter sequences for CLASH and CLEAR-CLIP	|
-| annotation	| Contains annotation files for human, mouse, and c elegans, as well as miRNA family file.	|
-| bin	| Contains SCRAP scripts	|
-| fasta	| contains miRBase and tRNA FASTAs	|
+| adatpers/	| Contains adapter sequences for CLASH and CLEAR-CLIP	|
+| annotation/	| Contains annotation files for human, mouse, and c elegans, as well as miRNA family file.	|
+| bin/	| Contains SCRAP scripts	|
+| fasta/	| contains miRBase and tRNA FASTAs	|
 | PLATFORM-SETUP.md     | Preliminary setup instructions for each compatible platform   |
 | README.md	| Contains instructions to install and run SCRAP	|
 | SCRAP_environment.yml   | File for creating a Conda environment with the requisite tools for running SCRAP        |
