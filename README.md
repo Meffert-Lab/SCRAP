@@ -65,7 +65,7 @@ Execute the `Reference_Installation.sh` script with the following command line p
 
 Example code for configuring human references:
 
-    bash SCRAP/Reference_Installation.sh \
+    bash SCRAP/bin/Reference_Installation.sh \
         -r SCRAP/ \
         -m hsa \
         -g hg38
@@ -74,30 +74,34 @@ Example code for configuring human references:
 
 Ensure data files are in the following configuration
 
-        │───SCRAP
-        │         SCRAP_environment.yml
-        │         Reference_Installation.sh
-        │         SCRAP.sh
-        │         Peak_Calling.sh
-        │         Peak_Annotation.sh
-        │         miRBase.fasta
-        │         miRBase.hairpin.fasta
-        │         GtRNAdb.fasta
-        │  
-        └───files 
-             │       
-             │
-             └───sample1
-             │       sample1_R1.fastq.gz
-             │       sample1_R2.fastq.gz
-             │
-             └───sample2
-             │       sample2_R1.fastq.gz
-             │       sample2_R2.fastq.gz
-             │
-             └───sample3
-                     sample3_R1.fastq.gz
-                     sample3_R2.fastq.gz
+	│───SCRAP
+	│	SCRAP_environment.yml
+	│	│
+	│	└───bin        
+	│	│	SCRAP.sh
+	│	│	Peak_Calling.sh
+	│	│	Peak_Annotation.sh
+	│	│	Reference_Installation.sh
+	│	│
+	│	└── fasta
+	│		miRBase.fasta
+	│		miRBase.hairpin.fasta
+	│		GtRNAdb.fasta
+	│
+	└───files 
+		│
+		│
+		└───sample1
+		│	sample1_R1.fastq.gz
+		│	sample1_R2.fastq.gz
+		│
+		└───sample2
+		│	sample2_R1.fastq.gz
+		│	sample2_R2.fastq.gz
+		│
+		└───sample3
+			sample3_R1.fastq.gz
+			sample3_R2.fastq.gz
 
 Execute the `SCRAP.sh` script with the following command line parameters:
 
