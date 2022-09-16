@@ -83,7 +83,7 @@ Ensure data files are in the following configuration
 	│	│	Peak_Annotation.sh
 	│	│	Reference_Installation.sh
 	│	│
-	│	└── fasta
+	│	└───fasta
 	│		miRBase.fasta
 	│		miRBase.hairpin.fasta
 	│		GtRNAdb.fasta
