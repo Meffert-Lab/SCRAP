@@ -86,9 +86,17 @@ Ensure data files are in the following configuration
 	│	│	Reference_Installation.sh
 	│	│
 	│	└───fasta
-	│		miRBase.fasta
-	│		miRBase.hairpin.fasta
-	│		GtRNAdb.fasta
+	│	│	miRBase.fasta
+	│	│	miRBase.hairpin.fasta
+	│	│	GtRNAdb.fasta
+	│	│	tRFdb.fasta
+	│	└───annotation
+	│		human.annotation.bed
+	│		miR_Family.txt
+	│		mouse.annotation.bed
+	│		worm.annotation.bed
+	│
+	│
 	│
 	└───files 
 		│
