@@ -1,21 +1,44 @@
 # SCRAP: a bioinformatic pipeline for the analysis of small chimeric RNA-seq data
 
+## Contents
+| File or Directory Name &nbsp;                    | Description |
+| -------------- | ---------- |
+| adatpers	| Contains adapter sequences for CLASH and CLEAR-CLIP	|
+| annotation	| Contains annotation files for human, mouse, and c elegans, as well as miRNA family file.	|
+| bin	| Contains SCRAP scripts	|
+| fasta	| contains miRBase and tRNA FASTAs	|
+| PLATFORM-SETUP.md     | Preliminary setup instructions for each compatible platform   |
+| README.md	| Contains instructions to install and run SCRAP	|
+| SCRAP_environment.yml   | File for creating a Conda environment with the requisite tools for running SCRAP        |
+
+### adapters
 | File Name &nbsp;                    | Description |
 | -------------- | ---------- |
-| PLATFORM-SETUP.md	| Preliminary setup instructions for each compatible platform	|
-| SCRAP_environment.yml   | File for creating a Conda environment with the requisite tools for running SCRAP        |
-| Reference_Installation.sh | Script for configuring reference files required for SCRAP |
-| SCRAP.sh   | Script for processing raw FASTQ files to identify sncRNA and genomic alignment of reads        |
-| Peak_Calling.sh   | Script for calling peaks using output files from SCRAP.sh        |
-| Peak_Annotation.sh   | Script for annotating bed file produced by Peak_Calling.sh with gene names and features        |
-| miRBase.fasta      | FASTA file containing miRNAs downloaded from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022)        |
-| miRBase.hairpin.fasta      | FASTA file containing miRNA hairpin sequences obtained from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022) |
-| GtRNAdb.fasta      | FASTA file containing tRNA sequences obtained from [GtRNAdb](http://gtrnadb.ucsc.edu) (accessed July 15, 2022)        |
+| CLASH_Human_Adapters.txt	| Adapters used in the CLASH libraries	|
+| CLEAR-CLIP_Mouse_Adapters.txt	| Adapters used in the CLEAR-CLIP libraries	|
+
+### annotation
+| File Name &nbsp;                    | Description |
+| -------------- | ---------- |
 | miRNA family file      | Tab-delimited list detailing which miRNA families contain which miRBase miRNAs        |
 | mouse annotation file      | Add description        |
 | human annotation file      | Add description        |
 | c elegans annotation file      | Add description        |
 
+### bin
+| File Name &nbsp;                    | Description |
+| -------------- | ---------- |
+| Reference_Installation.sh | Script for configuring reference files required for SCRAP |
+| SCRAP.sh   | Script for processing raw FASTQ files to identify sncRNA and genomic alignment of reads        |
+| Peak_Calling.sh   | Script for calling peaks using output files from SCRAP.sh        |
+| Peak_Annotation.sh   | Script for annotating bed file produced by Peak_Calling.sh with gene names and features        |
+
+### fasta
+| File Name &nbsp;                    | Description |
+| -------------- | ---------- |
+| miRBase.fasta      | FASTA file containing miRNAs downloaded from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022)        |
+| miRBase.hairpin.fasta      | FASTA file containing miRNA hairpin sequences obtained from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022) |
+| GtRNAdb.fasta      | FASTA file containing tRNA sequences obtained from [GtRNAdb](http://gtrnadb.ucsc.edu) (accessed July 15, 2022)        |
 
 ## Installation
 
