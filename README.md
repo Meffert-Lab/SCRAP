@@ -75,7 +75,7 @@ Example code for configuring human references:
 Ensure data files are in the following configuration
 
 	│───SCRAP
-	│	SCRAP_environment.yml
+	│	│
 	│	│
 	│	└───bin        
 	│	│	SCRAP.sh
