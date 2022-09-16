@@ -1,6 +1,6 @@
 #!/bin/sh
 
-while getopts r:m:g: flag
+while getopts r:m:g:s: flag
 do
     case "${flag}" in
         r) reference_directory=${OPTARG};;
