@@ -57,7 +57,7 @@ Create the Conda environment by running (requires [Miniconda](https://docs.conda
 
 Execute the `Reference_Installation.sh` script with the following command line parameters:
 
-| Command Line Parameter | Description |
+| Flag | Description |
 | ---------- | ---------- |
 | `-r` | Path to reference directory (e.g. `SCRAP`) |
 | `-m` | Three-letter miRBase species abbreviation |
@@ -105,7 +105,7 @@ Ensure data files are in the following configuration
 
 Execute the `SCRAP.sh` script with the following command line parameters:
 
-| Command Line Parameter | Description |
+| Flag | Description |
 | ---------- | ---------- |
 | `-d` | Path to directory containing sample directories |
 | `-a` | Path to adapter file |
@@ -136,7 +136,7 @@ The `.aligned.unique.sam` file produced by `SCRAP.sh` can be used to identify pe
 
 Execute the `Peak_Calling.sh` script with the following command line parameters:
 
-| Command Line Parameter | Description |
+| Flag | Description |
 | ---------- | ---------- |
 | `-d` | Path to directory containing sample directories |
 | `-a` | Path to adapter file |
@@ -169,7 +169,7 @@ The `peaks.bed` (or `peaks.family.bed`) file produced by `Peak_Calling.sh` can b
 
 Execute the `Peak_Annotation.sh` script with the following command line parameters:
 
-| Command Line Parameter | Description  |
+| Flag | Description  |
 | ---- | --------------- |
 | `-p` | Path to peaks.bed or peaks.family.bed file     |
 | `-r` | Path to reference directory (e.g. `SCRAP`)     |
