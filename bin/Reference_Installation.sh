@@ -59,20 +59,20 @@ fi
 	-dbtype nucl
 
 #Download genome
-#
-#	wget http://hgdownload.cse.ucsc.edu/goldenpath/${genome_species_abbreviation}/bigZips/${genome_species_abbreviation}.fa.gz -O ${genome_species_abbreviation}/${genome_species_abbreviation}.fa.gz
-#	gunzip -c ${genome_species_abbreviation}/${genome_species_abbreviation}.fa.gz > ${genome_species_abbreviation}/${genome_species_abbreviation}.fa
-#	rm -r ${genome_species_abbreviation}/${genome_species_abbreviation}.fa.gz
-#
+
+	wget http://hgdownload.cse.ucsc.edu/goldenpath/${genome_species_abbreviation}/bigZips/${genome_species_abbreviation}.fa.gz -O ${genome_species_abbreviation}/${genome_species_abbreviation}.fa.gz
+	gunzip -c ${genome_species_abbreviation}/${genome_species_abbreviation}.fa.gz > ${genome_species_abbreviation}/${genome_species_abbreviation}.fa
+	rm -r ${genome_species_abbreviation}/${genome_species_abbreviation}.fa.gz
+
 #Index mouse genome for HISAT2 alignment
 #Takes ~2 hours
-#
-#	cd ${genome_species_abbreviation}
-#
-#	hisat2-build ${genome_species_abbreviation}.fa ${genome_species_abbreviation}
-#
-#	cd ${reference_directory}
-#
+
+	cd ${genome_species_abbreviation}
+
+	hisat2-build ${genome_species_abbreviation}.fa ${genome_species_abbreviation}
+
+	cd ${reference_directory}
+
 #Download reference genome chromosome sizes
 
 	wget http://hgdownload.cse.ucsc.edu/goldenpath/${genome_species_abbreviation}/bigZips/${genome_species_abbreviation}.chrom.sizes -O ${genome_species_abbreviation}/${genome_species_abbreviation}.chrom.sizes
@@ -82,11 +82,11 @@ fi
 	wget https://hgdownload.cse.ucsc.edu/goldenPath/${genome_species_abbreviation}/database/refFlat.txt.gz -O ${genome_species_abbreviation}/${genome_species_abbreviation}refFlat.txt
 
 #Index mouse genome for GATK and Samtools
-#
-#	gatk CreateSequenceDictionary -R ${genome_species_abbreviation}/${genome_species_abbreviation}.fa
-#	samtools faidx ${genome_species_abbreviation}/${genome_species_abbreviation}.fa
-#
-#
+
+	gatk CreateSequenceDictionary -R ${genome_species_abbreviation}/${genome_species_abbreviation}.fa
+	samtools faidx ${genome_species_abbreviation}/${genome_species_abbreviation}.fa
+
+
 #Subset miRNA hairpin sequences for species of interest
 #miRBase.hairpin.fasta obtained using:	wget https://www.mirbase.org/ftp/CURRENT/hairpin.fa.gz -O miRBase.hairpin.fasta
 
