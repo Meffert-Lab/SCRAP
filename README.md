@@ -62,13 +62,15 @@ Execute the `Reference_Installation.sh` script with the following command line p
 | `-r` | Path to reference directory (e.g. `SCRAP`) |
 | `-m` | Three-letter miRBase species abbreviation |
 | `-g` | Reference genome abbreviation |
+| `-s` | Indicate species used for annotation (`human` (*H. sapiens*), `mouse` (*M. musculus*), or `worm` (*C. elegans*) |
 
 Example code for configuring human references:
 
     bash SCRAP/bin/Reference_Installation.sh \
         -r SCRAP/ \
         -m hsa \
-        -g hg38
+        -g hg38 \
+        -s human
 
 ## Running SCRAP
 
