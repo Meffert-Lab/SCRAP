@@ -107,7 +107,7 @@ then
 	-a 1 \
 	-1 2 -2 1 \
 	<(awk '/miRNA-/' ${directory}${sample}/${sample}.aligned.unique.sam | sed 's/\.miRNA-/\.miRNA-\t/' | sort -k2,2) \
-	<(grep "${miRBase_species}-" ${reference_directory}miR_Family.txt | sort -k1,1) | \
+	<(grep "${miRBase_species}-" ${reference_directory}annotation/miR_Family.txt | sort -k1,1) | \
 	awk '{$1=""}1' | \
 	awk '{$1=$1}1' | \
 	awk '{$1 = $1$NF; print}' | \
@@ -120,9 +120,6 @@ then
 	> ${directory}PeakCalling/${sample}.aligned.unique.tmp.sam
 
 	rm ${directory}${sample}/${sample}.sam.nonmiRNA.txt
-#	rm ${directory}${sample}/${sample}.aligned.unique.tmp.sam
-
-#	sed -i 's/\//\./g' ${directory}PeakCalling/${sample}.aligned.unique.tmp.sam
 
 else
 
@@ -140,11 +137,10 @@ fi
 	-b ${directory}PeakCalling/${sample}.aligned.unique.tmp.sam \
 	> ${directory}PeakCalling/${sample}.aligned.unique.bam
 
-
 #Split reads across unmapped regions (e.g. introns)
 
 	gatk SplitNCigarReads \
-	-R ${reference_directory}${genome_species_abbreviation}/${genome_species_abbreviation}.fa \
+	-R ${reference_directory}fasta/${genome_species_abbreviation}/${genome_species_abbreviation}.fa \
 	-I ${directory}PeakCalling/${sample}.aligned.unique.bam \
 	-O ${directory}PeakCalling/${sample}.aligned.unique.split.bam
 
