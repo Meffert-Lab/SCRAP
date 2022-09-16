@@ -39,6 +39,7 @@
 | miRBase.fasta      | FASTA file containing miRNAs downloaded from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022)        |
 | miRBase.hairpin.fasta      | FASTA file containing miRNA hairpin sequences obtained from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022) |
 | GtRNAdb.fasta      | FASTA file containing tRNA sequences obtained from [GtRNAdb](http://gtrnadb.ucsc.edu) (accessed July 15, 2022)        |
+| tRFdb.fasta	| FASTA file containing tRNA fragment sequences obtained from [miRBase](https://www.mirbase.org) (accessed July 15, 2022)	|
 
 ## Installation
 
