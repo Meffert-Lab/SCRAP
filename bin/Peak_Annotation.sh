@@ -41,7 +41,7 @@ reference_directory=$(echo "${reference_directory}" | sed 's![^/]$!&/!')
 	bedtools \
 	intersect \
 	-a ${peak_file} \
-	-b ${reference_directory}${species}.annotation.bed \
+	-b ${reference_directory}annotation/${species}.annotation.bed \
 	-s \
 	-wa \
 	-wb | \
@@ -57,7 +57,7 @@ reference_directory=$(echo "${reference_directory}" | sed 's![^/]$!&/!')
 	bedtools \
 	intersect \
 	-a ${peak_file} \
-	-b ${reference_directory}${species}.annotation.bed \
+	-b ${reference_directory}annotation/${species}.annotation.bed \
 	-s \
 	-wa \
 	-v | \
