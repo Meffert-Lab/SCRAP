@@ -387,7 +387,7 @@ then
 #Align reads to pre-miRNA reference file
 
 	blastn \
-	-db ${reference_directory}${miRBase_species_abbreviation}/hairpin_${miRBase_species_abbreviation}.fasta \
+	-db ${reference_directory}/fasta/${miRBase_species_abbreviation}/hairpin_${miRBase_species_abbreviation}.fasta \
 	-query ${directory}${sample}/${sample}.cutadapt.deduped.barcoded.fasta \
 	-out ${directory}${sample}/${sample}.preprocessed.premiRNA.blast \
 	-word_size 11 \
@@ -424,7 +424,7 @@ then
 #Align reads to tRNA reference file
 
 	blastn \
-	-db ${reference_directory}${miRBase_species_abbreviation}/tRNA_${miRBase_species_abbreviation}.fasta \
+	-db ${reference_directory}/fasta/${miRBase_species_abbreviation}/tRNA_${miRBase_species_abbreviation}.fasta \
 	-query ${directory}${sample}/${sample}.premiRNA.removed.fasta \
 	-out ${directory}${sample}/${sample}.preprocessed.tRNA.blast \
 	-word_size 11 \
@@ -473,7 +473,7 @@ fi
 #Align reads to sncRNA reference (configured during installation)
 
 	blastn \
-	-db ${reference_directory}${miRBase_species_abbreviation}/sncRNA_${miRBase_species_abbreviation}.fasta \
+	-db ${reference_directory}/fasta/${miRBase_species_abbreviation}/sncRNA_${miRBase_species_abbreviation}.fasta \
 	-query ${directory}${sample}/${sample}.cutadapt.deduped.barcoded.fasta \
 	-out ${directory}${sample}/${sample}.cutadapt.deduped.barcoded.blast \
 	-word_size 11 \
@@ -551,7 +551,7 @@ fi
 #Run HISAT2
 
 	hisat2 \
-	-x ${reference_directory}${genome_species_abbreviation}/${genome_species_abbreviation} \
+	-x ${reference_directory}/fasta/${genome_species_abbreviation}/${genome_species_abbreviation} \
 	-f ${directory}${sample}/${sample}.target.fasta \
 	-S ${directory}${sample}/${sample}.aligned.sam \
 	--summary-file ${directory}${sample}/${sample}.hisat2summary.txt
