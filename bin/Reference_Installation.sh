@@ -6,6 +6,7 @@ do
         r) reference_directory=${OPTARG};;
         m) miRBase_species_abbreviation=${OPTARG};;
         g) genome_species_abbreviation=${OPTARG};;
+	s) species=${OPTARG};;
     esac
 done
 
@@ -21,6 +22,11 @@ fi
 
 if [ -z "$genome_species_abbreviation" ]; then
     echo "Error: Species genome abbreviation not provided [-g]"
+    exit 1
+fi
+
+if [ -z "$species" ]; then
+    echo "Error: Species not provided [-s]"
     exit 1
 fi
 
@@ -88,7 +94,6 @@ fi
 	gatk CreateSequenceDictionary -R ${genome_species_abbreviation}/${genome_species_abbreviation}.fa
 	samtools faidx ${genome_species_abbreviation}/${genome_species_abbreviation}.fa
 
-
 #Subset miRNA hairpin sequences for species of interest
 #miRBase.hairpin.fasta obtained using:	wget https://www.mirbase.org/ftp/CURRENT/hairpin.fa.gz -O miRBase.hairpin.fasta
 
@@ -114,5 +119,10 @@ fi
 	makeblastdb \
 	-in ${miRBase_species_abbreviation}/tRNA_${miRBase_species_abbreviation}.fasta \
 	-dbtype nucl
+
+	cd ${reference_directory}
+	cd annotation
+
+	gunzip ${species}.annotation.bed.gz
 
 	conda deactivate
