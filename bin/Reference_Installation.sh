@@ -30,6 +30,7 @@ fi
 	conda activate SCRAP
 
 	cd ${reference_directory}
+	cd fasta
 
 	mkdir ${miRBase_species_abbreviation}
 	mkdir ${genome_species_abbreviation}
@@ -72,6 +73,7 @@ fi
 	hisat2-build ${genome_species_abbreviation}.fa ${genome_species_abbreviation}
 
 	cd ${reference_directory}
+	cd fasta
 
 #Download reference genome chromosome sizes
 
