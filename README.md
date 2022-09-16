@@ -20,10 +20,10 @@
 ### annotation
 | File Name &nbsp;                    | Description |
 | -------------- | ---------- |
-| miRNA family file      | Tab-delimited list detailing which miRNA families contain which miRBase miRNAs        |
-| mouse annotation file      | Add description        |
-| human annotation file      | Add description        |
-| c elegans annotation file      | Add description        |
+| miR_Family.txt	| Tab-delimited list detailing which miRNA families contain which miRBase miRNAs        |
+| mouse.annotation.bed.gz	| Mouse genome annotation file used to annotate peaks after calling	|
+| human.annotation.bed.gz	| Human genome annotation file used to annotate peals after calling	|
+| worm.annotation.bed.gz	| C. elegans genome annotation file used to annotate peaks after calling	|
 
 ### bin
 | File Name &nbsp;                    | Description |
