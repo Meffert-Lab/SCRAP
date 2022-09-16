@@ -11,7 +11,7 @@
 | miRBase.fasta      | FASTA file containing miRNAs downloaded from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022)        |
 | miRBase.hairpin.fasta      | FASTA file containing miRNA hairpin sequences obtained from [miRBase](https://www.mirbase.org/) (accessed July 15, 2022) |
 | GtRNAdb.fasta      | FASTA file containing tRNA sequences obtained from [GtRNAdb](http://gtrnadb.ucsc.edu) (accessed July 15, 2022)        |
-| miRNA family file      | Add description        |
+| miRNA family file      | Tab-delimited list detailing which miRNA families contain which miRBase miRNAs        |
 | mouse annotation file      | Add description        |
 | human annotation file      | Add description        |
 | c elegans annotation file      | Add description        |
