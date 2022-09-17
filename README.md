@@ -65,6 +65,16 @@ Execute the `Reference_Installation.sh` script with the following command line p
 | `-g` | Reference genome abbreviation |
 | `-s` | Indicate species used for annotation (`human` (*H. sapiens*), `mouse` (*M. musculus*), or `worm` (*C. elegans*) |
 
+
+### Three-letter miRBase Species Abbreviations
+| Abbreviation	| Species	|
+| hsa	| Homo sapiens	|
+| mmu	| Mus musculus	|
+| rno	| Rattus norvegicus	|
+| dme	| Drosophila melanogaster	|
+| cel	| Caenorhabditis elegans	|
+| ath	| Arabidopsis thaliana	|
+
 Example code for configuring human references:
 
     bash SCRAP/bin/Reference_Installation.sh \
