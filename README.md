@@ -67,7 +67,8 @@ Execute the `Reference_Installation.sh` script with the following command line p
 
 
 ### Three-letter miRBase Species Abbreviations
-| Abbreviation	| Species	|
+| Abbreviation &nbsp;	| Species	|
+| -------------- | ---------- |
 | hsa	| Homo sapiens	|
 | mmu	| Mus musculus	|
 | rno	| Rattus norvegicus	|
