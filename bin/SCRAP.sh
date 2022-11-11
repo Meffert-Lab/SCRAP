@@ -99,38 +99,38 @@ samples=$(awk '!/^#/' ${adapter_file} | awk '{print $1}')
 
 ###Quality Control (FastQC)###
 
-#for sample in $samples
-#do
-
 #Make output directory for FastQC reports
 
-#	mkdir ${directory}FastQC_Reports
+	mkdir ${directory}FastQC_Reports
+
+for sample in $samples
+do
 
 #Run FastQC
 #For further usage details: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/
 
-#for file in $(ls ${directory}${sample}/ | awk '/fastq/')
-#do
+for file in $(ls ${directory}${sample}/ | awk '/fastq/')
+do
 
-#	fastqc \
-#	-o ${directory}FastQC_Reports \
-#	${directory}${sample}/${file}
+	fastqc \
+	-o ${directory}FastQC_Reports \
+	${directory}${sample}/${file}
 
-#done
+done
 
-#done
+done
 
 
 ###Quality Control (MultiQC)###
 
 #Make output directory for MultiQC report
 
-#	mkdir ${directory}MultiQC_Report
+	mkdir ${directory}MultiQC_Report
 
 #Run MultiQC
 #For further usage details: https://multiqc.info/docs/
 
-#	multiqc ${directory}FastQC_Reports -o ${directory}MultiQC_Report
+	multiqc ${directory}FastQC_Reports -o ${directory}MultiQC_Report
 
 
 for sample in $samples
