@@ -1,7 +1,5 @@
 #!/bin/sh
 
-#Might not need reference directory
-
 while getopts d:a:r:c:l:f:m:g: flag
 do
     case "${flag}" in
@@ -96,6 +94,13 @@ samples=$(awk '!/^#/' ${adapter_file} | awk '{print $1}')
 
 for sample in ${samples}
 do
+
+#Convert bam file to sam file
+
+	samtools view \
+	-h \
+	${directory}PeakCalling/${sample}.aligned.unique.bam \
+	> ${directory}PeakCalling/${sample}.aligned.unique.sam
 
 if [ $family == "yes" ]
 then
