@@ -141,7 +141,7 @@ The adapter file is a tab-delimited `.txt` file containing the sample name, 5' a
 
 Example code for analyzing CLASH data:
 
-    bash SCRAP.sh \
+    bash SCRAP/bin/SCRAP.sh \
         -d CLASH_Human/ \
         -a CLASH_Human/CLASH_Human_Adapters.txt \
         -p no \
@@ -173,7 +173,7 @@ The adapter file can be the same as the adapter file used when running SCRAP or 
 
 Example code for calling peaks with CLASH data previously analyzed with `SCRAP.sh`:
 
-    bash Peak_Calling.sh \
+    bash SCRAP/bin/Peak_Calling.sh \
         -d CLASH_Human/ \
         -a CLASH_Human/CLASH_Human_Adapters.txt \
         -c 3 \
@@ -199,7 +199,7 @@ Execute the `Peak_Annotation.sh` script with the following command line paramete
 
 Example code for annotating peaks with CLASH data idnetified using `Peak_Calling.sh`:
 
-    bash Peak_Annotation.sh \
+    bash SCRAP/bin/Peak_Annotation.sh \
         -p CLASH_Human/peaks.bed \
         -r SCRAP/ \
         -s human
