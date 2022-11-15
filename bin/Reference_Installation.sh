@@ -78,8 +78,7 @@ fi
 
 	hisat2-build ${genome_species_abbreviation}.fa ${genome_species_abbreviation}
 
-	cd ${reference_directory}
-	cd fasta
+	cd ..
 
 #Download reference genome chromosome sizes
 
@@ -120,7 +119,7 @@ fi
 	-in ${miRBase_species_abbreviation}/tRNA_${miRBase_species_abbreviation}.fasta \
 	-dbtype nucl
 
-	cd ${reference_directory}
+	cd ..
 	cd annotation
 
 	gunzip ${species}.annotation.bed.gz
