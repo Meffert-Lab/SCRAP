@@ -99,7 +99,7 @@ do
 
 	samtools view \
 	-h \
-	${directory}PeakCalling/${sample}.aligned.unique.bam \
+	${directory}${sample}/${sample}.aligned.unique.bam \
 	> ${directory}PeakCalling/${sample}.aligned.unique.sam
 
 if [ $family == "yes" ]
