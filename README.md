@@ -56,11 +56,16 @@ Create the Conda environment by running (requires [Miniconda](https://docs.conda
     conda install -n base conda-forge::mamba
     mamba env create -f SCRAP/SCRAP_environment.yml -n SCRAP
 
-*Note: as of Dec 2022, `bioconda` does not build for `osx-arm64`. If you are using an M1 Mac, please see the following workarounds:*
+*Note: as of Dec 2022, `bioconda` does not build for `osx-arm64`. If you are using an M1 Mac, please try the following workaround:*
 
-https://github.com/conda/conda/issues/11216
+	conda create -n SCRAP python=3.8
+	conda activate SCRAP
+	conda config --env --set subdir osx-64
+	conda env update --file SCRAP/SCRAP_environment.yml --prune
 
-https://stackoverflow.com/questions/71515117/how-to-set-up-a-conda-osx-64-environment-on-arm-mac
+*You can find more information about this at the following links:*
+ - https://github.com/conda/conda/issues/11216
+ - https://stackoverflow.com/questions/71515117/how-to-set-up-a-conda-osx-64-environment-on-arm-mac
 
 Execute the `Reference_Installation.sh` script with the following command line parameters:
 
