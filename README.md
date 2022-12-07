@@ -59,6 +59,7 @@ Create the Conda environment by running (requires [Miniconda](https://docs.conda
 *Note: as of Dec 2022, `bioconda` does not build for `osx-arm64`. If you are using an M1 Mac, please see the following workarounds:*
 
 https://github.com/conda/conda/issues/11216
+
 https://stackoverflow.com/questions/71515117/how-to-set-up-a-conda-osx-64-environment-on-arm-mac
 
 Execute the `Reference_Installation.sh` script with the following command line parameters:
