@@ -49,6 +49,8 @@ conda init zsh	#For zsh
 conda init bash	#For bash
 ```
 
+You may need to close and reopen your Terminal following Miniconda installation.
+
 ### Not using Homebrew
 If you prefer not to use Homebrew, you can install Git as follows.
 
@@ -71,6 +73,8 @@ You can check which shell you are using by launching a Terminal window and readi
 conda init zsh  #For zsh
 conda init bash #For bash
 ```
+
+You may need to close and reopen your Terminal following Miniconda installation.
 
 #### M1
 
