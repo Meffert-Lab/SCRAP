@@ -19,6 +19,7 @@ After launching WSL, you can then install Git and Miniconda as follows.
 sudo apt install git
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
+conda init bash
 ```
 
 You may need to close and reopen WSL following Miniconda installation.
@@ -31,11 +32,21 @@ Homebrew is a great package manager from MacOS. You can install brew as follows:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+*Note: read your terminal output carefully after Homebrew installation is complete. You may need to run additional commands to finish installation.*
+
 Once brew is installed, you can install Git and Miniconda as follows.
 
 ```
 brew install git
 brew install Miniconda
+```
+
+You will have to initialize Conda for the shell you use. In most cases this will primarily be `zsh`, or alternatively `bash`.
+You can check which shell you are using by launching a Terminal window and reading the title bar.
+
+```
+conda init zsh	#For zsh
+conda init bash	#For bash
 ```
 
 ### Not using Homebrew
@@ -53,11 +64,27 @@ curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh --ou
 bash Miniconda3-latest-MacOSX-x86_64.sh
 ```
 
+You will have to initialize Conda for the shell you use. In most cases this will primarily be `zsh`, or alternatively `bash`.
+You can check which shell you are using by launching a Terminal window and reading the title bar.
+
+```
+conda init zsh  #For zsh
+conda init bash #For bash
+```
+
 #### M1
 
 ```
 curl https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh --output Miniconda3-latest-MacOSX-arm64.sh
 bash Miniconda3-latest-MacOSX-x86_64.sh
+```
+
+You will have to initialize Conda for the shell you use. In most cases this will primarily be `zsh`, or alternatively `bash`.
+You can check which shell you are using by launching a Terminal window and reading the title bar.
+
+```
+conda init zsh  #For zsh
+conda init bash #For bash
 ```
 
 You may need to close and reopen your Terminal following Miniconda installation.
