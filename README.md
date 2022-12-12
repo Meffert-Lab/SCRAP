@@ -161,11 +161,11 @@ Example code for analyzing CLASH data:
         -m hsa \
         -g hg38
 
-After data have been analyzed with `SCRAP.sh`, sample folders will contain a file ending in `.aligned.unique.sam`
+After data have been analyzed with `SCRAP.sh`, sample folders will contain a file ending in `.aligned.unique.bam`
 
 ## Peak Calling
 
-The `.aligned.unique.sam` file produced by `SCRAP.sh` can be used to identify peaks where multiple sncRNAs or sncRNA familiy members bind to the same region of the genome.
+The `.aligned.unique.bam` file produced by `SCRAP.sh` can be used to identify peaks where multiple sncRNAs or sncRNA familiy members bind to the same region of the genome.
 
 Execute the `Peak_Calling.sh` script with the following command line parameters:
 
