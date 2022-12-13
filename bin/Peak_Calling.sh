@@ -62,10 +62,6 @@ directory=$(echo "${directory}" | sed 's![^/]$!&/!')
 
 reference_directory=$(echo "${reference_directory}" | sed 's![^/]$!&/!')
 
-#Set how far peak should be extended from center for motif finding
-
-extension=10
-
 #For the most part, code modifications are not required below this line
 ##############################################################################
 
@@ -116,10 +112,9 @@ then
 	awk '{$1=""}1' | \
 	awk '{$1=$1}1' | \
 	awk '{$1 = $1$NF; print}' | \
-	awk 'NF{NF-=1};1' \
+	awk 'NF{NF-=1};1' | \
+	sed 's/ /\t/g' \
 	> ${directory}${sample}/${sample}.aligned.unique.tmp.sam
-
-	sed -i 's/ /\t/g' ${directory}${sample}/${sample}.aligned.unique.tmp.sam
 
 	cat ${directory}${sample}/${sample}.sam.nonmiRNA.txt ${directory}${sample}/${sample}.aligned.unique.tmp.sam \
 	> ${directory}PeakCalling/${sample}.aligned.unique.tmp.sam
