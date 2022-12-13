@@ -76,6 +76,7 @@ Execute the `Reference_Installation.sh` script with the following command line p
 | `-g` | Reference genome abbreviation |
 | `-s` | Indicate species used for annotation (`human` (*H. sapiens*), `mouse` (*M. musculus*), or `worm` (*C. elegans*) |
 
+*Note: You should check NCBI for the latest reference genome available for the species you are using, as these change over time.*
 
 ### Three-letter miRBase Species Abbreviations
 | Abbreviation &nbsp;	| Species	|
