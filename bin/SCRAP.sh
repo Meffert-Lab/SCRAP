@@ -191,7 +191,7 @@ done
 if [ $paired_end == "yes" ]
 then
 
-#Make directory for FLASh outpout
+#Make directory for FLASh output
 
 	mkdir ${directory}${sample}/${sample}_FLASh
 
