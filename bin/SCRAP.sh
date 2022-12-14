@@ -87,7 +87,7 @@ minimum_length_after_sncRNA=15
 #For the most part, code modifications are not required below this line
 ##############################################################################
 
-#Activate conda environemnt 
+#Activate conda environment 
 
 	location=$(conda info | awk '/base environment/' | awk '{print $4}')
 	source ${location}/etc/profile.d/conda.sh
