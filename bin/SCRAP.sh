@@ -213,7 +213,7 @@ then
 
 	mv ${directory}${sample}/${sample}_FLASh/${sample}.extendedFrags.fastq.gz ${directory}${sample}/${sample}.fastq.gz
 
-#If paired-end reads were combinded, delete the folder containing the temporary files generated during FLASh
+#If paired-end reads were combined, delete the folder containing the temporary files generated during FLASh
 
 	[ -e ${directory}${sample}/${sample}_FLASh ] && rm -r ${directory}${sample}/${sample}_FLASh
 
