@@ -207,8 +207,8 @@ do
 #Find start and stop position of maximal coverage within window
 
 	paste \
-	<(sort -k1,1 -k2,2n -k8,8nr -k7,7n ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 1-3,6,7) \
-	<(sort -k1,1 -k2,2n -k8,8nr -k7,7nr ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 7) | \
+	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7n ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 1-3,6,7) \
+	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7nr ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 7) | \
 	awk '{print $1"\t"($2+$5-1)"\t"($2+$6)"\t""X""\t""X""\t"$4}' \
 	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered
 
