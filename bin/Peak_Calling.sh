@@ -154,7 +154,7 @@ fi
 #Append sncRNA (or family) name to chromosome number to allow for all peaks to be called at once
 
 	sed 's/\./\t/' ${directory}PeakCalling/${sample}.aligned.unique.split.bed | \
-	awk '{print $1"."$5"\t"$2"\t"$3"\t""X""\t""X""\t"$7}' \
+	awk '{OFS="\t"} {print $1"."$5,$2,$3,"X","X",$7}' \
 	> ${directory}PeakCalling/${sample}.aligned.unique.split.rearranged.bed
 
 #Combine bed files for each sample into a single file
@@ -193,7 +193,7 @@ do
 
 	bedtools \
 	coverage \
-	-a <(awk '{print $1"\t"$2"\t"$3"\t""X""\t""X""\t"$4}' ${directory}PeakCalling/combined.rearranged.sorted.merged) \
+	-a <(awk '{OFS="\t"} {print $1,$2,$3,"X","X",$4}' ${directory}PeakCalling/combined.rearranged.sorted.merged) \
 	-b ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed \
 	-s \
 	-d | \
@@ -209,7 +209,7 @@ do
 	paste \
 	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7n ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 1-3,6,7) \
 	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7nr ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 7) | \
-	awk '{print $1"\t"($2+$5-1)"\t"($2+$6)"\t""X""\t""X""\t"$4}' \
+	awk '{OFS="\t"} {print $1,($2+$5-1),($2+$6),"X","X",$4}' \
 	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered
 
 	cat ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered >> ${directory}PeakCalling/potential.peaks.bed
@@ -285,11 +285,11 @@ done
 
 	bedtools \
 	coverage \
-	-a <(awk '{print $1"\t"$2"\t"$3"\t""X""\t""X""\t"$6}' ${directory}PeakCalling/filtered.peaks.bed | sort -k1,1 -k2,2n) \
-	-b <(awk '{print $1"\t"$2"\t"$3"\t""X""\t""X""\t"$6}' ${directory}PeakCalling/combined.rearranged.bed | sort -k1,1 -k2,2n) \
+	-a <(awk '{OFS="\t"} {print $1,$2,$3,"X","X",$6}' ${directory}PeakCalling/filtered.peaks.bed | sort -k1,1 -k2,2n) \
+	-b <(awk '{OFS="\t"} {print $1,$2,$3,"X","X",$6}' ${directory}PeakCalling/combined.rearranged.bed | sort -k1,1 -k2,2n) \
 	-s | \
 	sed 's/\./\t/' | \
-	awk '{print $1"\t"$3"\t"$4"\t"$2"\t"$8"\t"$7}' \
+	awk '{OFS="\t"} {print $1,$3,$4,$2,$8,$7}' \
 	> ${directory}PeakCalling/peaks.bed
 
 if [ $family == "yes" ]
