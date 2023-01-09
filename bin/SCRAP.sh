@@ -18,8 +18,18 @@ if [ -z "$directory" ]; then
     exit 1
 fi
 
+if [ ! -d "$directory" ]; then
+    echo "Invalid directory [-d]"
+    exit 1
+fi
+
 if [ -z "$adapter_file" ]; then
     echo "Error: Path to adapter file not provided [-a]"
+    exit 1
+fi
+
+if [ ! -f "$adapter_file" ]; then
+    echo "Error: Adapter file does not exist [-a]"
     exit 1
 fi
 
@@ -35,6 +45,11 @@ fi
 
 if [ -z "$reference_directory" ]; then
     echo "Error: Path to reference directory not provided [-r]"
+    exit 1
+fi
+
+if [ ! -d "$reference_directory" ]; then
+    echo "Error: Invalid reference directory [-r]"
     exit 1
 fi
 
