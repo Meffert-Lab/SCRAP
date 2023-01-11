@@ -1,6 +1,7 @@
 # SCRAP: a bioinformatic pipeline for the analysis of small chimeric RNA-seq data
 
-Mills, W. T., 4th, Eadara, S., Jaffe, A. E., & Meffert, M. K. (2022). SCRAP: a bioinformatic pipeline for the analysis of small chimeric RNA-seq data. RNA (New York, N.Y.), rna.079240.122. Advance online publication. https://doi.org/10.1261/rna.079240.122
+William T. Mills IV, Sreenivas Eadara, Andrew E. Jaffe, and Mollie K. Meffert
+*RNA* January 2023 29: 1-17; Published in Advance October 31, 2022, doi:10.1261/rna.079240.122
 
 ## Contents
 | File or Directory Name &nbsp;                    | Description |
