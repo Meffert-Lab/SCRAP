@@ -1,6 +1,6 @@
 # SCRAP: a bioinformatic pipeline for the analysis of small chimeric RNA-seq data
 
-Mills WT, Eadara S, Jaffe AE, Meffert MK. 2023. SCRAP: a bioinformatic pipeline for the analysis of small chimeric RNA-seq data. RNA 29: 1–17. doi:10.1261/rna.079240.122
+Mills WT, Eadara S, Jaffe AE, Meffert MK. 2023. SCRAP: a bioinformatic pipeline for the analysis of small chimeric RNA-seq data. *RNA* 29: 1–17. [doi:10.1261/rna.079240.122](doi:10.1261/rna.079240.122)
 
 ## Contents
 | File or Directory Name &nbsp;                    | Description |
