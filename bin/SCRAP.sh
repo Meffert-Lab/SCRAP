@@ -121,6 +121,23 @@ samples=$(awk '!/^#/' ${adapter_file} | awk '{print $1}')
 for sample in $samples
 do
 
+#Check if sequence files exist - otherwise skip the sample
+if [ $paired_end == "yes" ]
+then 
+
+   if [ ! -f ${directory}${sample}/${sample}_R1.fastq.gz] || [ ! -f ${directory}${sample}/${sample}_R2.fastq.gz ]; then
+   echo "Paired-end reads (SAMPLE_R1.fastq.gz or SAMPLE_R2.fastq.gz) do not exist for ${sample}! Skipping . . ."
+
+   continue
+
+else
+
+   if [ ! -f ${directory}${sample}/${sample}.fastq.gz]; then
+   echo "Reads (SAMPLE.fastq.gz) do not exist for ${sample}! Skipping . . ."
+
+   continue
+fi
+
 #Run FastQC
 #For further usage details: https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/
 
