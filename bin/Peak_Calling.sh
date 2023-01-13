@@ -91,6 +91,14 @@ samples=$(awk '!/^#/' ${adapter_file} | awk '{print $1}')
 for sample in ${samples}
 do
 
+#Check if result file exists, otherwise skip
+
+if [ ! -f ${directory}${sample}/${sample}.aligned.unique.bam ]; then
+   echo "Result (SAMPLE.aligned.unique.bam) does not exist for ${sample}! Skipping . . ."
+   continue
+fi
+
+
 #Convert bam file to sam file
 
 	samtools view \
