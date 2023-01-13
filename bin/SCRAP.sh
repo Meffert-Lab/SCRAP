@@ -122,7 +122,7 @@ for sample in $samples
 do
 
 #Check if sequence files exist - otherwise skip the sample
-if [ $paired_end == "yes" ]
+if [ $paired_end == "yes" ];
 then 
 
    if [ ! -f ${directory}${sample}/${sample}_R1.fastq.gz] || [ ! -f ${directory}${sample}/${sample}_R2.fastq.gz ]; then
