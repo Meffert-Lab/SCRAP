@@ -38,8 +38,18 @@ if [ -z "$paired_end" ]; then
     exit 1
 fi
 
+if [ "$paired_end" != "yes" ] && [ "$paired_end" != "no" ]; then
+    echo "Error: yes and no are the valid responses [-p]"
+    exit 1
+fi
+
 if [ -z "$pre_filtered" ]; then
     echo "Error: Filter out pre-miRNAs and tRNAs? [-f]"
+    exit 1
+fi
+
+if [ "$pre_filtered" != "yes" ] && [ "$paired_end" != "no" ]; then
+    echo "Error: yes and no are the valid responses [-f]"
     exit 1
 fi
 
