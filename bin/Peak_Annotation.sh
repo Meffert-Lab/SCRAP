@@ -14,8 +14,18 @@ if [ -z "$peak_file" ]; then
     exit 1
 fi
 
+if [ -f "$peak_file" ]; then
+    echo "Error: peak file does not exist [-p]"
+    exit 1
+fi
+
 if [ -z "$reference_directory" ]; then
     echo "Error: Path to reference directory not provided [-r]"
+    exit 1
+fi
+
+if [ -d "$reference_directory" ]; then
+    echo "Error: invalid reference directory [-r]"
     exit 1
 fi
 
