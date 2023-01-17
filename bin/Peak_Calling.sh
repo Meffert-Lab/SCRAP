@@ -19,8 +19,18 @@ if [ -z "$directory" ]; then
     exit 1
 fi
 
+if [ ! -d "$directory" ]; then
+    echo "Invalid directory [-d]"
+    exit 1
+fi
+
 if [ -z "$adapter_file" ]; then
     echo "Error: Path to adapter file not provided [-a]"
+    exit 1
+fi
+
+if [ ! -f "$adapter_file" ]; then
+    echo "Error: Adapter file does not exist [-a]"
     exit 1
 fi
 
@@ -29,8 +39,28 @@ if [ -z "$minimum_reads" ]; then
     exit 1
 fi
 
+if [ ! "$minimum_reads" -eq "$minimum_reads" ]; then
+    echo "Error: Minimum read count is NaN [-c]"
+    exit 1
+fi
+
+if [ "$minimum_reads" -lt 0 ]; then
+    echo "Error: Minimum read count is less than 0 [-c]"
+    exit 1
+fi
+
 if [ -z "$minimum_libraries" ]; then
     echo "Error: Minimum library count not set [-l]"
+    exit 1
+fi
+
+if [ ! "$minimum_libraries" -eq "minimum_libraries" ]; then
+    echo "Error: Minimum library count is less than 0 [-l]"
+    exit 1
+fi
+
+if [ "$minimum_libraries -lt 0 ]; then
+    echo "Error: Minimum library count is less than 0 [-l]"
     exit 1
 fi
 
@@ -39,8 +69,18 @@ if [ -z "$family" ]; then
     exit 1
 fi
 
+if [ "$family" != "yes" ] && [ "$family" != "no" ]; then
+    echo "Error: yes and no are the valid responses [-f]"
+    exit 1
+fi
+
 if [ -z "$reference_directory" ]; then
     echo "Error: Path to reference directory not provided [-r]"
+    exit 1
+fi
+
+if [ ! -d "$reference_directory" ]; then
+    echo "Error: Invalid reference directory [-r]"
     exit 1
 fi
 
