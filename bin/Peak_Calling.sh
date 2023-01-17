@@ -55,7 +55,7 @@ if [ -z "$minimum_libraries" ]; then
 fi
 
 if [ ! "$minimum_libraries" -eq "minimum_libraries" ]; then
-    echo "Error: Minimum library count is less than 0 [-l]"
+    echo "Error: Minimum library count is NaN [-l]"
     exit 1
 fi
 
