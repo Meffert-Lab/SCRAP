@@ -59,7 +59,7 @@ if [ ! "$minimum_libraries" -eq "minimum_libraries" ]; then
     exit 1
 fi
 
-if [ "$minimum_libraries -lt 0 ]; then
+if [ "$minimum_libraries" -lt 0 ]; then
     echo "Error: Minimum library count is less than 0 [-l]"
     exit 1
 fi
@@ -89,7 +89,7 @@ if [ -z "$miRBase_species_abbreviation" ]; then
     exit 1
 fi
 
-if [ ! -f "${reference_directory}/fasta/sncRNA_${miRBase_species_abbreviation}.fasta ]; then
+if [ ! -f "${reference_directory}/fasta/sncRNA_${miRBase_species_abbreviation}.fasta" ]; then
     echo "Error: bad miRBase abbrevation or bad reference installation [-m]"
     exit 1
 fi
