@@ -123,6 +123,10 @@ minimum_length_after_sncRNA=15
 	source ${location}/etc/profile.d/conda.sh
 
 	conda activate SCRAP
+	if [ $? -ne 0 ]; then
+		echo "Error: have you set up the SCRAP environment?"
+		exit 1
+	fi
 
 samples=$(awk '!/^#/' ${adapter_file} | awk '{print $1}')
 

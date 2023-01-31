@@ -47,6 +47,10 @@ reference_directory=$(echo "${reference_directory}" | sed 's![^/]$!&/!')
 	source ${location}/etc/profile.d/conda.sh
 
 	conda activate SCRAP
+	if [ $? -ne 0 ]; then
+		echo "Error: have you set up the SCRAP environment?"
+		exit 1
+	fi
 
 	bedtools \
 	intersect \
