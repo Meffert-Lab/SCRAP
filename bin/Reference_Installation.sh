@@ -34,6 +34,10 @@ fi
 	source ${location}/etc/profile.d/conda.sh
 
 	conda activate SCRAP
+	if [ $? -ne 0 ]; then
+		echo "Error: have you set up the SCRAP environment?"
+		exit 1
+	fi
 
 	cd ${reference_directory}
 	cd fasta
@@ -68,6 +72,10 @@ fi
 #Download genome
 
 	wget http://hgdownload.cse.ucsc.edu/goldenpath/${genome_species_abbreviation}/bigZips/${genome_species_abbreviation}.fa.gz -O ${genome_species_abbreviation}/${genome_species_abbreviation}.fa.gz
+	if [ $? -ne 0 ]; then
+		echo "Error: did you provide a valid genome species abbreviation and is the genome available on UCSC?"
+		exit 1
+	fi
 	gunzip -c ${genome_species_abbreviation}/${genome_species_abbreviation}.fa.gz > ${genome_species_abbreviation}/${genome_species_abbreviation}.fa
 	rm -r ${genome_species_abbreviation}/${genome_species_abbreviation}.fa.gz
 
