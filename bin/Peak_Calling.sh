@@ -255,8 +255,7 @@ done
 			awk -v var=${minimum_reads} '$8 >= var' \
 			> ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed
 			
-			#echo "Cycle complete" >> ${directory}PeakCalling/cycles.txt
-			#exit 1
+			echo "Cycle complete" >> ${directory}PeakCalling/cycles.txt
 		done
 	done
 
@@ -297,7 +296,7 @@ done
 				sed -i '$ d' "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered"
 				printf '%s\t%s' "$coverageLine" "$maximaSecondCoord" | awk '{OFS="\t"} {print $1,($2+$7-1),($2+$9),"X",$6,"-"}' >> "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered"
 
-			done # < "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.bed"
+			done
 		
 		# Subtract reads that align to most downstream peak in interval
 			bedtools \
@@ -317,8 +316,7 @@ done
 			awk -v var=${minimum_reads} '$8 >= var' \
 			> ${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.bed
 
-			#echo "Cycle complete" >> ${directory}PeakCalling/cycles.txt
-			#exit 1
+			echo "Cycle complete" >> ${directory}PeakCalling/cycles.txt
 		done
 	done
 
@@ -376,13 +374,9 @@ done
 	${directory}PeakCalling/potential.peaks.sorted.coverage.bed \
 	>> ${directory}PeakCalling/filtered.peaks.bed
 
-	bedtools \
-	coverage \
-	-a <(awk '{OFS="\t"} {print $1,$2,$3,"X","$5",$6}' ${directory}PeakCalling/filtered.peaks.bed | sort -k1,1 -k2,2n) \
-	-b <(awk '{OFS="\t"} {print $1,$2,$3,"X","$5",$6}' ${directory}PeakCalling/combined.rearranged.bed | sort -k1,1 -k2,2n) \
-	-s | \
-	sed 's/\./\t/' | \
-	awk '{OFS="\t"} {print $1,$3,$4,$2,$8,$7}' \
+# Use count from downstream/upstream peak calling approach, which does not create duplicate counts!
+	sed 's/\./\t/' "${directory}PeakCalling/filtered.peaks.bed" | \
+	awk '{OFS="\t"} {print $1,$3,$4,$2,$6,$7}' \
 	> ${directory}PeakCalling/peaks.bed
 
 if [ $family == "yes" ]
@@ -418,6 +412,6 @@ else
 
 fi
 
-#	rm -r ${directory}PeakCalling
+	rm -r ${directory}PeakCalling
 
 conda deactivate
