@@ -259,7 +259,71 @@ done
 			#exit 1
 		done
 	done
-exit 1
+
+#Perform cycles of peak calling for - strand
+
+	tac ${directory}PeakCalling/minus.combined.rearranged.sorted.merged.bed | while read intervalLine || [[ -n $intervalLine ]];
+	do
+
+	# Get the read coverage for a single interval and write it to minus.combined.rearranged.sorted.merged.coverage.bed
+		echo "$intervalLine" | awk '{OFS="\t"} {print $1,$2,$3,"X","X",$4}' | bedtools coverage \
+		-a stdin \
+		-b ${directory}PeakCalling/minus.combined.rearranged.sorted.tmp.bed \
+		-d | \
+		awk -v var=${minimum_reads} '$8 >= var' \
+		> ${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.bed
+	
+	# Iterate over peaks in this interval and call them, removing reads as you go proceeding from - to + (slower but avoids duplicate calls)
+	# If interval does not have sufficient overlap (less than minimum_reads) loop is not entered. Can occur where > minimum_reads overlap to form an interval but do not all stack.
+		while [ -s "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.bed" ]
+		do
+			prevCoverageCount=0
+		
+		# Identify most downstream peak in the interval
+			echo "" >> "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered"
+			tac "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.bed" | while read -r coverageLine || [[ -n $coverageLine ]];
+			do
+				
+				currentCoverageCount=$(echo "$coverageLine" | awk '{print $8}')
+				if [ $prevCoverageCount -gt "$currentCoverageCount" ]
+				then
+					break
+				fi
+				if [ $currentCoverageCount -gt $prevCoverageCount ]
+				then
+					maximaSecondCoord=$(echo "$coverageLine" | awk '{print $7}')
+					prevCoverageCount=$currentCoverageCount
+				fi
+				sed -i '$ d' "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered"
+				printf '%s\t%s' "$coverageLine" "$maximaSecondCoord" | awk '{OFS="\t"} {print $1,($2+$7-1),($2+$9),"X",$6,"-"}' >> "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered"
+
+			done # < "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.bed"
+		
+		# Subtract reads that align to most downstream peak in interval
+			bedtools \
+			subtract \
+			-a ${directory}PeakCalling/minus.combined.rearranged.sorted.tmp.bed \
+				-b ${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered \
+				-s \
+				-A \
+				> ${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered.outside
+			mv ${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered.outside ${directory}PeakCalling/minus.combined.rearranged.sorted.tmp.bed
+
+		# Reassess coverage of remaining reads on interval. While loop exits if none
+			echo "$intervalLine" | awk '{OFS="\t"} {print $1,$2,$3,"X","X",$4}' | bedtools coverage \
+			-a stdin \
+			-b ${directory}PeakCalling/minus.combined.rearranged.sorted.tmp.bed \
+			-d | \
+			awk -v var=${minimum_reads} '$8 >= var' \
+			> ${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.bed
+
+			#echo "Cycle complete" >> ${directory}PeakCalling/cycles.txt
+			#exit 1
+		done
+	done
+
+
+cat "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered" "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered" > ${directory}PeakCalling/potential.peaks.bed
 
 #Sort bed file for easier processing
 
@@ -314,8 +378,8 @@ done
 
 	bedtools \
 	coverage \
-	-a <(awk '{OFS="\t"} {print $1,$2,$3,"X","X",$6}' ${directory}PeakCalling/filtered.peaks.bed | sort -k1,1 -k2,2n) \
-	-b <(awk '{OFS="\t"} {print $1,$2,$3,"X","X",$6}' ${directory}PeakCalling/combined.rearranged.bed | sort -k1,1 -k2,2n) \
+	-a <(awk '{OFS="\t"} {print $1,$2,$3,"X","$5",$6}' ${directory}PeakCalling/filtered.peaks.bed | sort -k1,1 -k2,2n) \
+	-b <(awk '{OFS="\t"} {print $1,$2,$3,"X","$5",$6}' ${directory}PeakCalling/combined.rearranged.bed | sort -k1,1 -k2,2n) \
 	-s | \
 	sed 's/\./\t/' | \
 	awk '{OFS="\t"} {print $1,$3,$4,$2,$8,$7}' \
