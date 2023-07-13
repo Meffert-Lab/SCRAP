@@ -171,66 +171,174 @@ done
 
 	cp ${directory}PeakCalling/combined.rearranged.sorted.bed ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed
 
-#Perform cycles of peak calling
+#Separate tmp copy of combined bed file into constituent + and - strand reads
 
-x=1
-while [[ $x > 0 ]]
-do
+	cat ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed | awk '$6 ~ /+/' > ${directory}PeakCalling/plus.combined.rearranged.sorted.tmp.bed
+	cat ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed | awk '$6 ~ /-/' > ${directory}PeakCalling/minus.combined.rearranged.sorted.tmp.bed
 
-#Merge overlapping reads
+#Merge overlapping reads for + and - strands
+#Save only the merged intervals with > minimum_reads
 
 	bedtools \
 	merge \
-	-i ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed \
-	-s \
-	-c 6 \
-	-o distinct \
-	> ${directory}PeakCalling/combined.rearranged.sorted.merged
-
-#Determine coverage across overlapping regions
-#Remove regions with fewer than minimum read threshold (assigned at beginning of script)
-#Remaining regions termed "windows"
+	-i ${directory}PeakCalling/plus.combined.rearranged.sorted.tmp.bed \
+	-S + \
+	-c 1 \
+	-o count \
+	| awk -v var=${minimum_reads} '$4 >= var' \
+	> ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.bed
 
 	bedtools \
-	coverage \
-	-a <(awk '{OFS="\t"} {print $1,$2,$3,"X","X",$4}' ${directory}PeakCalling/combined.rearranged.sorted.merged) \
-	-b ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed \
-	-s \
-	-d | \
-	awk -v var=${minimum_reads} '$8 >= var' \
-	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage
+	merge \
+	-i ${directory}PeakCalling/minus.combined.rearranged.sorted.tmp.bed \
+	-S - \
+	-c 1 \
+	-o count \
+	| awk -v var=${minimum_reads} '$4 >= var' \
+	> ${directory}PeakCalling/minus.combined.rearranged.sorted.merged.bed
 
-#Count the number of windows with minimal read coverage to see if another round of peak calling should be completed
+	#exit 1
+#Perform cycles of peak calling for + strand
 
-	x=$(wc -l ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '{print $1}')
+	cat ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.bed | while read intervalLine || [[ -n $intervalLine ]];
+	do
 
-#Find start and stop position of maximal coverage within window
+	# Get the read coverage for a single interval and write it to plus.combined.rearranged.sorted.merged.coverage.bed
+		echo "$intervalLine" | awk '{OFS="\t"} {print $1,$2,$3,"X","X",$4}' | bedtools coverage \
+		-a stdin \
+		-b ${directory}PeakCalling/plus.combined.rearranged.sorted.tmp.bed \
+		-d | \
+		awk -v var=${minimum_reads} '$8 >= var' \
+		> ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed
+		
+	# Iterate over peaks in this interval and call them, removing reads as you go proceeding from + to - (slower but avoids duplicate calls)
+	# If interval does not have sufficient overlap (less than minimum_reads) loop is not entered. Can occur where > minimum_reads overlap to form an interval but do not all stack.
+		while [ -s "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed" ]
+		do
+			# if [ ! -s "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed" ]
+			# then
+			# 	continue
+			# fi
 
-	paste \
-	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7n ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 1-3,6,7) \
-	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7nr ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 7) | \
-	awk '{OFS="\t"} {print $1,($2+$5-1),($2+$6),"X","X",$4}' \
-	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered
+			prevCoverageCount=0
+			#maximaCoordinatesFound=false
+			#maximaFirstCoord=0
+			#maximaSecondCoord=1
 
-	cat ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered >> ${directory}PeakCalling/potential.peaks.bed
+			# while read coverageLine
+			# do
+			# 	currentCoverageCount=$(echo "$coverageLine" | awk '{print $8}')
+			# 	#intervalStart=$(echo "$coverageLine" | awk '{print $2}')
+			# 	currentPos=$(echo "$coverageLine" | awk '{print $7}')
 
-#Remove reads that overlap with peak
+			# 	if [ $currentCoverageCount -gt $prevCoverageCount ];
+			# 	then
+			# 		maximaFirstCoord=$currentPos-1
+			# 		prevCoverageCount=$currentCoverageCount
+			# 	elif [ $currentCoverageCount -eq $prevCoverageCount ];
+			# 	then
+			# 		maximaSecondCoord=$currentPos
+			# 	else
+			# 		#maximaCoordinatesFound=true
+					
+			# 		printf '%s\t%s\t%s\t%s' "$coverageLine" "$maximaFirstCoord" "$maximaSecondCoord" "$prevCoverageCount" | awk '{OFS="\t"} {print $1,($2+$9),($2+$10),"X","X","+",$10}' > ${directory}PeakCalling/potential.peaks.bed
+			# 		continue 2
+				
+			# 	fi
+			# done < ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed
+		
+		# Identify most upstream peak in the interval
+			echo "" >> "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered"
+			while read -r coverageLine
+			do
+				
+				currentCoverageCount=$(echo "$coverageLine" | awk '{print $8}')
+				if [ $prevCoverageCount -gt "$currentCoverageCount" ]
+				then
+					break
+				fi
+				if [ $currentCoverageCount -gt $prevCoverageCount ]
+				then
+					maximaFirstCoord=$(echo "$coverageLine" | awk '{print $7-1}')
+					prevCoverageCount=$currentCoverageCount
+				fi
+				sed -i '$ d' "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered"
+				printf '%s\t%s' "$coverageLine" "$maximaFirstCoord" | awk '{OFS="\t"} {print $1,($2+$9),($2+$7),"X",$6,"+"}' >> "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered"
 
-	bedtools \
-	subtract \
-	-a ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed \
-	-b ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered \
-	-s \
-	-A \
-	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered.outside
+			done < "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed"
+		
+		# Subtract reads that align to most upstream peak in interval
+			bedtools \
+			subtract \
+			-a ${directory}PeakCalling/plus.combined.rearranged.sorted.tmp.bed \
+				-b ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered \
+				-s \
+				-A \
+				> ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered.outside
+			
+			mv ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered.outside ${directory}PeakCalling/plus.combined.rearranged.sorted.tmp.bed
 
-#Replace temporary bed file with bed file that reads were removed from
+		# Reassess coverage of remaining reads on interval. While loop exits if none
+			echo "$intervalLine" | awk '{OFS="\t"} {print $1,$2,$3,"X","X",$4}' | bedtools coverage \
+			-a stdin \
+			-b ${directory}PeakCalling/plus.combined.rearranged.sorted.tmp.bed \
+			-d | \
+			awk -v var=${minimum_reads} '$8 >= var' \
+			> ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed
+			
+			#echo "Cycle complete" >> ${directory}PeakCalling/cycles.txt
+			#exit 1
+		done
+	done
+exit 1
+# x=1
+# while [[ $x > 0 ]]
+# do
 
-	mv ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered.outside ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed
+# #Determine coverage across overlapping regions
+# #Remove regions with fewer than minimum read threshold (assigned at beginning of script)
+# #Remaining regions termed "windows"
 
-	echo "Cycle complete" >> ${directory}PeakCalling/cycles.txt
+# 	bedtools \
+# 	coverage \
+# 	-a <(awk '{OFS="\t"} {print $1,$2,$3,"X","X",$4}' ${directory}PeakCalling/combined.rearranged.sorted.merged) \
+# 	-b ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed \
+# 	-s \
+# 	-d | \
+# 	awk -v var=${minimum_reads} '$8 >= var' \
+# 	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage
 
-done
+# #Count the number of windows with lowest read coverage to see if another round of peak calling should be completed
+
+# 	x=$(wc -l ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '{print $1}')
+
+# #Find start and stop position of maximal coverage within window
+
+# 	paste \
+# 	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7n ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 1-3,6,7) \
+# 	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7nr ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 7) | \
+# 	awk '{OFS="\t"} {print $1,($2+$5-1),($2+$6),"X","X",$4}' \
+# 	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered
+
+# 	cat ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered >> ${directory}PeakCalling/potential.peaks.bed
+
+# #Remove reads that overlap with peak
+
+# 	bedtools \
+# 	subtract \
+# 	-a ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed \
+# 	-b ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered \
+# 	-s \
+# 	-A \
+# 	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered.outside
+
+# #Replace temporary bed file with bed file that reads were removed from
+
+# 	mv ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered.outside ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed
+
+# 	echo "Cycle complete" >> ${directory}PeakCalling/cycles.txt
+
+# done
 
 #Sort bed file for easier processing
 
@@ -325,6 +433,6 @@ else
 
 fi
 
-	rm -r ${directory}PeakCalling
+#	rm -r ${directory}PeakCalling
 
 conda deactivate
