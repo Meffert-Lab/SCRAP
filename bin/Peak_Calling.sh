@@ -209,7 +209,7 @@ done
 		-d | \
 		awk -v var=${minimum_reads} '$8 >= var' \
 		> ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed
-		
+
 	# Iterate over peaks in this interval and call them, removing reads as you go proceeding from + to - (slower but avoids duplicate calls)
 	# If interval does not have sufficient overlap (less than minimum_reads) loop is not entered. Can occur where > minimum_reads overlap to form an interval but do not all stack.
 		while [ -s "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed" ]
@@ -232,7 +232,7 @@ done
 					prevCoverageCount=$currentCoverageCount
 				fi
 				sed -i '$ d' "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered"
-				printf '%s\t%s' "$coverageLine" "$maximaFirstCoord" | awk '{OFS="\t"} {print $1,($2+$9),($2+$7),"X",$6,"+"}' >> "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered"
+				printf '%s\t%s' "$coverageLine" "$maximaFirstCoord" | awk '{OFS="\t"} {print $1,($2+$9),($2+$7),"X",$8,"+"}' >> "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered"
 
 			done < "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed"
 		
@@ -294,7 +294,7 @@ done
 					prevCoverageCount=$currentCoverageCount
 				fi
 				sed -i '$ d' "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered"
-				printf '%s\t%s' "$coverageLine" "$maximaSecondCoord" | awk '{OFS="\t"} {print $1,($2+$7-1),($2+$9),"X",$6,"-"}' >> "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered"
+				printf '%s\t%s' "$coverageLine" "$maximaSecondCoord" | awk '{OFS="\t"} {print $1,($2+$7-1),($2+$9),"X",$8,"-"}' >> "${directory}PeakCalling/minus.combined.rearranged.sorted.merged.coverage.filtered"
 
 			done
 		
