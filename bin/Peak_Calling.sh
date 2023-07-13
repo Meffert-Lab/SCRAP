@@ -197,7 +197,6 @@ done
 	| awk -v var=${minimum_reads} '$4 >= var' \
 	> ${directory}PeakCalling/minus.combined.rearranged.sorted.merged.bed
 
-	#exit 1
 #Perform cycles of peak calling for + strand
 
 	cat ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.bed | while read intervalLine || [[ -n $intervalLine ]];
@@ -215,37 +214,7 @@ done
 	# If interval does not have sufficient overlap (less than minimum_reads) loop is not entered. Can occur where > minimum_reads overlap to form an interval but do not all stack.
 		while [ -s "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed" ]
 		do
-			# if [ ! -s "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed" ]
-			# then
-			# 	continue
-			# fi
-
 			prevCoverageCount=0
-			#maximaCoordinatesFound=false
-			#maximaFirstCoord=0
-			#maximaSecondCoord=1
-
-			# while read coverageLine
-			# do
-			# 	currentCoverageCount=$(echo "$coverageLine" | awk '{print $8}')
-			# 	#intervalStart=$(echo "$coverageLine" | awk '{print $2}')
-			# 	currentPos=$(echo "$coverageLine" | awk '{print $7}')
-
-			# 	if [ $currentCoverageCount -gt $prevCoverageCount ];
-			# 	then
-			# 		maximaFirstCoord=$currentPos-1
-			# 		prevCoverageCount=$currentCoverageCount
-			# 	elif [ $currentCoverageCount -eq $prevCoverageCount ];
-			# 	then
-			# 		maximaSecondCoord=$currentPos
-			# 	else
-			# 		#maximaCoordinatesFound=true
-					
-			# 		printf '%s\t%s\t%s\t%s' "$coverageLine" "$maximaFirstCoord" "$maximaSecondCoord" "$prevCoverageCount" | awk '{OFS="\t"} {print $1,($2+$9),($2+$10),"X","X","+",$10}' > ${directory}PeakCalling/potential.peaks.bed
-			# 		continue 2
-				
-			# 	fi
-			# done < ${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.bed
 		
 		# Identify most upstream peak in the interval
 			echo "" >> "${directory}PeakCalling/plus.combined.rearranged.sorted.merged.coverage.filtered"
@@ -291,54 +260,6 @@ done
 		done
 	done
 exit 1
-# x=1
-# while [[ $x > 0 ]]
-# do
-
-# #Determine coverage across overlapping regions
-# #Remove regions with fewer than minimum read threshold (assigned at beginning of script)
-# #Remaining regions termed "windows"
-
-# 	bedtools \
-# 	coverage \
-# 	-a <(awk '{OFS="\t"} {print $1,$2,$3,"X","X",$4}' ${directory}PeakCalling/combined.rearranged.sorted.merged) \
-# 	-b ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed \
-# 	-s \
-# 	-d | \
-# 	awk -v var=${minimum_reads} '$8 >= var' \
-# 	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage
-
-# #Count the number of windows with lowest read coverage to see if another round of peak calling should be completed
-
-# 	x=$(wc -l ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '{print $1}')
-
-# #Find start and stop position of maximal coverage within window
-
-# 	paste \
-# 	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7n ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 1-3,6,7) \
-# 	<(sort -k1,1 -k6,6 -k2,2n -k8,8nr -k7,7nr ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage | awk '!window[$1, $2, $3, $6]++' | cut -f 7) | \
-# 	awk '{OFS="\t"} {print $1,($2+$5-1),($2+$6),"X","X",$4}' \
-# 	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered
-
-# 	cat ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered >> ${directory}PeakCalling/potential.peaks.bed
-
-# #Remove reads that overlap with peak
-
-# 	bedtools \
-# 	subtract \
-# 	-a ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed \
-# 	-b ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered \
-# 	-s \
-# 	-A \
-# 	> ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered.outside
-
-# #Replace temporary bed file with bed file that reads were removed from
-
-# 	mv ${directory}PeakCalling/combined.rearranged.sorted.merged.coverage.filtered.outside ${directory}PeakCalling/combined.rearranged.sorted.tmp.bed
-
-# 	echo "Cycle complete" >> ${directory}PeakCalling/cycles.txt
-
-# done
 
 #Sort bed file for easier processing
 
