@@ -10,7 +10,7 @@ dependencies:
   - blast
   - hisat2
   - samtools
-  - bedtools
+  - bedtools>=2.24.0
   - gatk4
   - sra-tools
   - viennarna
