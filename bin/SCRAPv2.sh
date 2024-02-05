@@ -443,7 +443,7 @@ fi
 
 
 #Join tabular input file with filtered BLAST results
-##this is where I can't get it to work anymore, I keep getting an empty file
+
 	join \
 	<(sort -k1,1 ${directory}${sample}/${sample}.sncrnaidentified.blast -T ${directory}${sample}) \
 	<(sort -k1,1 ${directory}${sample}/${sample}.cutadapt.deduped.barcoded.tab -T ${directory}${sample}) \
