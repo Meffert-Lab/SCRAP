@@ -9,8 +9,9 @@ cel_rRNA.fasta.gz
 3. RNA types: rRNA
 4. Organisms: Caenorhabditis elegans
 5. Expert databases: WormBase
-6. Click 'Download' on the top right, select 'FASTA'
-7. Output renamed (cel_rRNA.fasta.gz)
+   (Alternatively, enter ```so_rna_type_name:"RRNA" AND TAXONOMY:"6239" AND expert_db:"WormBase"``` into search bar)
+7. Click 'Download' on the top right, select 'FASTA'
+8. Output renamed (cel_rRNA.fasta.gz)
 
 hsa_rRNA.fasta.gz
 
