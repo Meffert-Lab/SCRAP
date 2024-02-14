@@ -8,7 +8,7 @@ cel_rRNA.fasta.gz
 2. Click 'Browse'
 3. RNA types: rRNA
 4. Organisms: Caenorhabditis elegans
-5. Expert databases: WormBase
+5. Expert databases: WormBase <br/>
    (Alternatively, enter ```so_rna_type_name:"RRNA" AND TAXONOMY:"6239" AND expert_db:"WormBase"``` into search bar)
 7. Click 'Download' on the top right, select 'FASTA'
 8. Output renamed (cel_rRNA.fasta.gz)
@@ -30,7 +30,7 @@ mmu_rRNA.fasta.gz
 2. Click 'Browse'
 3. RNA types: rRNA
 4. Organisms: Mus musculus
-5. Expert databases: Ensembl
+5. Expert databases: Ensembl <br/>
    (Alternatively, enter ```so_rna_type_name:"RRNA" AND TAXONOMY:"10090" AND expert_db:"Ensembl"``` into search bar)
 7. Click 'Download' on the top right, select 'FASTA'
 8. Output renamed (mmu_rRNA.fasta.gz)
