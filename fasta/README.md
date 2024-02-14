@@ -30,8 +30,9 @@ mmu_rRNA.fasta.gz
 3. RNA types: rRNA
 4. Organisms: Mus musculus
 5. Expert databases: Ensembl
-6. Click 'Download' on the top right, select 'FASTA'
-7. Output renamed (mmu_rRNA.fasta.gz)
+   (Alternatively, enter ```so_rna_type_name:"RRNA" AND TAXONOMY:"10090" AND expert_db:"Ensembl"``` into search bar)
+7. Click 'Download' on the top right, select 'FASTA'
+8. Output renamed (mmu_rRNA.fasta.gz)
 
 miRBase.fasta.gz (needs to be zipped)
 
