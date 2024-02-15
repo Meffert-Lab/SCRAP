@@ -1,0 +1,17 @@
+#Subset miRNA sequences for species of interest
+#miRBase.fasta obtained using:		wget https://www.mirbase.org/ftp/CURRENT/mature.fa.gz -O miRBase.fasta
+#Final miRNA name format (example): miRNA-mmu-let-7c-5p
+
+	awk '/^>/ {printf "%s%s ", pfx, $0; pfx="\n"; next} {printf "%s", $0} END {print ""}' miRBase.fasta | \
+	grep "${miRBase_species_abbreviation}-" | \
+	awk '{print $1"\n"$6}' | \
+	sed 's/>/>miRNA-/g' \
+	> ${miRBase_species_abbreviation}/miRNA_${miRBase_species_abbreviation}.fasta
+
+	grep -A1 "${miRBase_species_abbreviation}" tRFdb.fasta \
+	> ${miRBase_species_abbreviation}/tRF_${miRBase_species_abbreviation}.fasta
+
+	cat \
+	${miRBase_species_abbreviation}/miRNA_${miRBase_species_abbreviation}.fasta \
+	${miRBase_species_abbreviation}/tRF_${miRBase_species_abbreviation}.fasta	\
+	> ${miRBase_species_abbreviation}/sncRNA_${miRBase_species_abbreviation}.fasta
