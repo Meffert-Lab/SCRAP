@@ -1,8 +1,1 @@
-#Subset miRNA hairpin sequences for species of interest
-#miRBase.hairpin.fasta obtained using:	wget https://www.mirbase.org/ftp/CURRENT/hairpin.fa.gz -O miRBase.hairpin.fasta
-
-	awk '/^>/ {printf "%s%s ", pfx, $0; pfx="\n"; next} {printf "%s", $0} END {print ""}' miRBase.hairpin.fasta | \
-	grep "${miRBase_species_abbreviation}-" | \
-	awk '{print $1"\n"$7}' | \
-	sed 's/>/>miRNA-hairpin-/g' \
-	> ${miRBase_species_abbreviation}/hairpin_${miRBase_species_abbreviation}.fasta
+wget https://www.mirbase.org/download/hairpin.fa -O pre-miRNA.fasta
