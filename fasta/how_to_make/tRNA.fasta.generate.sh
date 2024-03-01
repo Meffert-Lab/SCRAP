@@ -52,4 +52,4 @@ mv tmp2.combined.fasta tmp.combined.fasta
 
 done
 
-mv tmp.combined.fasta GtRNAdb.fasta
+mv tmp.combined.fasta tRNA.fasta
